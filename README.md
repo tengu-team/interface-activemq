@@ -1,7 +1,8 @@
 # ActiveMQ Interface
 
  This is a Juju charm interface layer. This interface is used for
- connecting to an Apache ActiveMQ unit.
+ connecting to an Apache ActiveMQ unit. In order to use this interface with the ActiveMQ charm,
+ this repo should be cloned into the $INTERFACE_PATH and renamed to activemq instead of interface-activemq
 
 ### Examples
 
