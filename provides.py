@@ -21,24 +21,19 @@ from charms.reactive import scopes
 
 
 class ActiveMQProvides(RelationBase):
-    scope = scopes.UNIT
+    scope = scopes.GLOBAL
 
-    @hook('{provides:activemq}-relation-{joined,changed}')
+    @hook('{provides:activemq-sub}-relation-{joined,changed}')
     def changed(self):
         self.set_state('{relation_name}.available')
 
-    @hook('{provides:activemq}-relation-{broken,departed}')
+    @hook('{provides:activemq-sub}-relation-{broken,departed}')
     def broken(self):
         self.remove_state('{relation_name}.available')
 
-    def configure(self, port, private_address=None, hostname=None):
-        if not hostname:
-            hostname = hookenv.unit_get('private-address')
-        if not private_address:
-            private_address = hookenv.unit_get('private-address')
+    def configure(self, port, version):
         relation_info = {
-            'hostname': hostname,
-            'private-address': private_address,
             'port': port,
+            'version': version
         }
         self.set_remote(**relation_info)

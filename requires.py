@@ -37,5 +37,5 @@ class ActiveMQRequires(RelationBase):
 
     def connection(self):
         for conv in self.conversations():
-            yield {'host': conv.get_remote('host'),
+            yield {'version': conv.get_remote('version'),
                    'port': conv.get_remote('port')}
