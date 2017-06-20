@@ -22,18 +22,20 @@ from charms.reactive import scopes
 class ActiveMQRequires(RelationBase):
     scope = scopes.UNIT
 
-    @hook('{requires:activemq}-relation-{joined,changed}')
+    @hook('{requires:activemq-sub}-relation-{joined,changed}')
     def changed(self):
         conv = self.conversation()
         if conv.get_remote('port'):
-            # this unit's conversation has a port, so
-            # it is part of the set of available units
+            conv.remove_state('{relation_name}.removed')
             conv.set_state('{relation_name}.available')
 
-    @hook('{requires:activemq}-relation-{departed,broken}')
+
+    @hook('{requires:activemq-sub}-relation-{departed,broken}')
     def broken(self):
         conv = self.conversation()
+        conv.set_state('{relation_name}.removed')
         conv.remove_state('{relation_name}.available')
+
 
     def connection(self):
         for conv in self.conversations():

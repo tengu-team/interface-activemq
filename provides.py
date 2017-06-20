@@ -25,15 +25,20 @@ class ActiveMQProvides(RelationBase):
 
     @hook('{provides:activemq-sub}-relation-{joined,changed}')
     def changed(self):
-        self.set_state('{relation_name}.available')
+        conv = self.conversation()
+        conv.remove_state('{relation_name}.removed')
+        conv.set_state('{relation_name}.available')
 
     @hook('{provides:activemq-sub}-relation-{broken,departed}')
     def broken(self):
-        self.remove_state('{relation_name}.available')
+        conv = self.conversation()
+        conv.remove_state('{relation_name}.available')
+        conv.set_state('{relation_name}.removed')
 
     def configure(self, port, version):
+        conv = self.conversation()
         relation_info = {
             'port': port,
             'version': version
         }
-        self.set_remote(**relation_info)
+        conv.set_remote(**relation_info)
