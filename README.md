@@ -1,8 +1,7 @@
 # ActiveMQ Interface
 
  This is a Juju charm interface layer. This interface is used for
- connecting to an Apache ActiveMQ unit. In order to use this interface with the ActiveMQ charm,
- this repo should be cloned into the $INTERFACE_PATH and renamed to activemq instead of interface-activemq
+ connecting to an Apache ActiveMQ unit.
 
 ### Examples
 
@@ -37,7 +36,7 @@ def connect_to_activemq(messagebroker):
 
 #### Provides
 
-The ActiveMQ charm can be found [here](https://github.com/Qrama/layer-activemq):
+The ActiveMQ charm can be found [here](https://jujucharms.com/u/tengu-team/activemq/):
 
   `metadata.yaml`
 
