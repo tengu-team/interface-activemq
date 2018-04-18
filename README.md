@@ -14,13 +14,13 @@ If your charm needs to connect to ActiveMQ:
 ```yaml
 requires:
   messagebroker:
-    interface: activemq
+    interface: activemq-sub
 ```
 
   `layer.yaml`
 
 ```yaml
-includes: ['interface:activemq']
+includes: ['interface:activemq-sub']
 ```  
 
   `reactive/code.py`
@@ -43,13 +43,13 @@ The ActiveMQ charm can be found [here](https://jujucharms.com/u/tengu-team/activ
 ```yaml
 provides:
     messagebroker:
-      interface: activemq
+      interface: activemq-sub
 ```
 
   `layer.yaml`
 
 ```yaml
-includes: ['interface:activemq']
+includes: ['interface:activemq-sub']
 ```
 
   `reactive/code.py`
